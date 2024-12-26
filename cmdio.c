@@ -9,7 +9,7 @@ extern "C" {
 #include <unistd.h>
 #include <fcntl.h>
 
-int cokbhit(void)
+EXPORT int cokbhit(void)
 {
 	int ch, oldf;
 	struct termios oldt, newt;
@@ -36,30 +36,30 @@ int cokbhit(void)
 	return 0;
 }
 
-int cogetch(void)
+EXPORT int cogetch(void)
 {
 	return getchar();
 }
 #elif _WIN32
 #include <conio.h>
 
-int cokbhit(void)
+EXPORT int cokbhit(void)
 {
 	reutrn kbhit();
 }
 
-int cogetch(void)
+EXPORT int cogetch(void)
 {
 	return getch();
 }
 #endif
 
-inline void coclear(void)
+EXPORT inline void coclear(void)
 {
 	printf("\e[1;1H\e[2J");
 }
 
-inline void comove(size_t row, size_t col)
+EXPORT inline void comove(size_t row, size_t col)
 {
 	printf("\e[%lu;%luH", row, col);
 	fflush(stdout);
