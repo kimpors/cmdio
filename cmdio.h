@@ -9,5 +9,5 @@
 
 EXPORT int cokbhit(void);
 EXPORT int cogetch(void);
-EXPORT inline void coclear(void);
-EXPORT inline void comove(size_t row, size_t col);
+EXPORT void coclear(void);
+EXPORT void comove(size_t row, size_t col);

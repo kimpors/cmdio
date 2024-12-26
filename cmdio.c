@@ -45,7 +45,7 @@ EXPORT int cogetch(void)
 
 EXPORT int cokbhit(void)
 {
-	reutrn kbhit();
+	return kbhit();
 }
 
 EXPORT int cogetch(void)
@@ -56,12 +56,12 @@ EXPORT int cogetch(void)
 
 EXPORT inline void coclear(void)
 {
-	printf("\e[1;1H\e[2J");
+	printf("\033[1;1H\033[2J");
 }
 
 EXPORT inline void comove(size_t row, size_t col)
 {
-	printf("\e[%lu;%luH", row, col);
+	printf("\033[%lu;%luH", row, col);
 	fflush(stdout);
 }
 
