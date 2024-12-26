@@ -35,12 +35,22 @@ int cokbhit(void)
 
 	return 0;
 }
+
+int cogetch(void)
+{
+	return getchar();
+}
 #elif _WIN32
 #include <conio.h>
 
 int cokbhit(void)
 {
 	reutrn kbhit();
+}
+
+int cogetch(void)
+{
+	return getch();
 }
 #endif
 
