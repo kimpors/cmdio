@@ -41,6 +41,10 @@ EXPORT int cogetch(void)
 	return getchar();
 }
 
+EXPORT inline void cosize(struct winsize *size)
+{
+	ioctl(STDIN_FILENO, TIOCGWINSZ, size);
+}
 #elif _WIN32
 #include <conio.h>
 

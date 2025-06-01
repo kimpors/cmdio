@@ -4,7 +4,9 @@
 #ifdef _WIN32
 	#define EXPORT __declspec(dllexport)
 #elif __linux__
+	#include <sys/ioctl.h>
 	#define EXPORT
+	EXPORT void cosize(struct winsize *size);
 #endif
 
 typedef enum {
