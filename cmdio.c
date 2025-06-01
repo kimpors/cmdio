@@ -40,6 +40,7 @@ EXPORT int cogetch(void)
 {
 	return getchar();
 }
+
 #elif _WIN32
 #include <conio.h>
 
@@ -53,6 +54,21 @@ EXPORT int cogetch(void)
 	return getch();
 }
 #endif
+
+EXPORT inline void cofgcolor(CO_Color color)
+{
+	printf("\033[%dm", color);
+}
+
+EXPORT inline void cobgcolor(CO_Color color)
+{
+	printf("\033[%dm", color + 10);
+}
+
+EXPORT inline void cocolor(CO_Color fg, CO_Color bg)
+{
+	printf("\033[%d;%dm", fg, bg + 10);
+}
 
 EXPORT inline void coclear(void)
 {
