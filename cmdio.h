@@ -30,4 +30,4 @@ EXPORT void SPREFIX(clear)(void);
 EXPORT void SPREFIX(bgcolor)(PREFIX(Color) color);
 EXPORT void SPREFIX(fgcolor)(PREFIX(Color) color);
 EXPORT void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg);
-EXPORT void SPREFIX(move)(size_t row, size_t col);
+EXPORT void SPREFIX(move)(size_t col, size_t row);

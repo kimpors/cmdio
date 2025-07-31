@@ -79,7 +79,7 @@ EXPORT inline void SPREFIX(clear)(void)
 	printf("\033[1;1H\033[2J");
 }
 
-EXPORT inline void SPREFIX(move)(size_t row, size_t col)
+EXPORT inline void SPREFIX(move)(size_t col, size_t row)
 {
 	printf("\033[%lu;%luH", row, col);
 	fflush(stdout);
