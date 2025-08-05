@@ -34,6 +34,27 @@ int SPREFIX(kbhit)(void)
 	return 0;
 }
 
+void SPREFIX(getpos)(size_t *x, size_t *y)
+{
+	int oldf;
+	struct termios old, new;
+	tcgetattr(STDIN_FILENO, &old);
+	new = old;
+	new.c_lflag &= ~(ICANON | ECHO);
+	tcsetattr(STDIN_FILENO, TCSANOW, &new);
+
+	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
+	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
+
+	char s[] = "\033[6n";
+
+	printf("\033[6n");
+	scanf("\033[%ld,%ldR", x, y);
+
+	tcsetattr(STDIN_FILENO, TCSANOW, &old);
+	fcntl(STDIN_FILENO, F_SETFL, oldf);
+}
+
 int SPREFIX(getch)(void)
 {
 	return getchar();

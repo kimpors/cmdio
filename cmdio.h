@@ -24,3 +24,4 @@ void SPREFIX(bgcolor)(PREFIX(Color) color);
 void SPREFIX(fgcolor)(PREFIX(Color) color);
 void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg);
 void SPREFIX(move)(size_t col, size_t row);
+void SPREFIX(getpos)(size_t *x, size_t *y);
