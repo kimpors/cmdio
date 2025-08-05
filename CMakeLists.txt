@@ -3,8 +3,11 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(cmdio VERSION 1.0.0 LANGUAGES C)
 set(CMAKE_C_STANDART 23)
 
-if (WIN32)
-	add_library(${PROJECT_NAME} STATIC cmdio.c)
-else()
-	add_library(${PROJECT_NAME} SHARED cmdio.c)
-endif(WIN32)
+# if (WIN32)
+# 	add_library(${PROJECT_NAME} STATIC cmdio.c)
+# else()
+# 	add_library(${PROJECT_NAME} SHARED cmdio.c)
+
+add_library(${PROJECT_NAME} SHARED cmdio.c)
+
+#endif(WIN32)

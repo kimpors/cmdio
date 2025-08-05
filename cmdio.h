@@ -1,16 +1,9 @@
 #pragma once
 #include <stdio.h>
+#include <sys/ioctl.h>
 
 #define PREFIX(name) CO_##name 
 #define SPREFIX(name) co_##name // small prefix
-
-#ifdef _WIN32
-	#define EXPORT __declspec(dllexport)
-#elif __linux__
-	#include <sys/ioctl.h>
-	#define EXPORT
-	EXPORT void SPREFIX(size)(struct winsize *size);
-#endif
 
 typedef enum {
 	PREFIX(RESET),
@@ -24,10 +17,10 @@ typedef enum {
 	PREFIX(WHITE)
 } PREFIX(Color);
 
-EXPORT int SPREFIX(kbhit)(void);
-EXPORT int SPREFIX(getch)(void);
-EXPORT void SPREFIX(clear)(void);
-EXPORT void SPREFIX(bgcolor)(PREFIX(Color) color);
-EXPORT void SPREFIX(fgcolor)(PREFIX(Color) color);
-EXPORT void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg);
-EXPORT void SPREFIX(move)(size_t col, size_t row);
+int SPREFIX(kbhit)(void);
+int SPREFIX(getch)(void);
+void SPREFIX(clear)(void);
+void SPREFIX(bgcolor)(PREFIX(Color) color);
+void SPREFIX(fgcolor)(PREFIX(Color) color);
+void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg);
+void SPREFIX(move)(size_t col, size_t row);
