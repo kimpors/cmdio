@@ -7,7 +7,7 @@
 extern "C" {
 #endif
 
-int SPREFIX(kbhit)(void)
+int CO_S(kbhit)(void)
 {
 	int ch, oldf;
 	struct termios oldt, newt;
@@ -34,7 +34,7 @@ int SPREFIX(kbhit)(void)
 	return 0;
 }
 
-void SPREFIX(getpos)(size_t *x, size_t *y)
+void CO_S(getpos)(size_t *x, size_t *y)
 {
 	int oldf;
 	struct termios old, new;
@@ -46,8 +46,6 @@ void SPREFIX(getpos)(size_t *x, size_t *y)
 	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
 	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-	char s[] = "\033[6n";
-
 	printf("\033[6n");
 	scanf("\033[%ld,%ldR", x, y);
 
@@ -55,37 +53,42 @@ void SPREFIX(getpos)(size_t *x, size_t *y)
 	fcntl(STDIN_FILENO, F_SETFL, oldf);
 }
 
-int SPREFIX(getch)(void)
+int CO_S(getch)(void)
 {
 	return getchar();
 }
 
-inline void SPREFIX(size)(struct winsize *size)
+inline void CO_S(putch)(char ch)
+{
+	putchar(ch);
+}
+
+inline void CO_S(size)(struct winsize *size)
 {
 	ioctl(STDIN_FILENO, TIOCGWINSZ, size);
 }
 
-inline void SPREFIX(fgcolor)(PREFIX(Color) color)
+inline void CO_S(fgcolor)(CO(Color) color)
 {
 	printf("\033[%dm", color);
 }
 
-inline void SPREFIX(bgcolor)(PREFIX(Color) color)
+inline void CO_S(bgcolor)(CO(Color) color)
 {
 	printf("\033[%dm", color + 10);
 }
 
-inline void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg)
+inline void CO_S(color)(CO(Color) fg, CO(Color) bg)
 {
 	printf("\033[%d;%dm", fg, bg + 10);
 }
 
-inline void SPREFIX(clear)(void)
+inline void CO_S(clear)(void)
 {
 	printf("\033[1;1H\033[2J");
 }
 
-inline void SPREFIX(move)(size_t col, size_t row)
+inline void CO_S(move)(size_t col, size_t row)
 {
 	printf("\033[%lu;%luH", row, col);
 	fflush(stdout);

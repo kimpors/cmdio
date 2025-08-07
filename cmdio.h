@@ -2,26 +2,28 @@
 #include <stdio.h>
 #include <sys/ioctl.h>
 
-#define PREFIX(name) CO_##name 
-#define SPREFIX(name) co_##name // small prefix
+#define PREFIX(name, object) name ## _ ## object
+#define CO(object) PREFIX(CO, object)
+#define CO_S(object) PREFIX(co, object)
 
 typedef enum {
-	PREFIX(RESET),
-	PREFIX(BLACK),
-	PREFIX(RED),
-	PREFIX(GREEN),
-	PREFIX(YELLOW),
-	PREFIX(BLUE),
-	PREFIX(PINK),
-	PREFIX(CYAN),
-	PREFIX(WHITE)
-} PREFIX(Color);
+	CO(RESET),
+	CO(BLACK),
+	CO(RED),
+	CO(GREEN),
+	CO(YELLOW),
+	CO(BLUE),
+	CO(PINK),
+	CO(CYAN),
+	CO(WHITE)
+} CO(Color);
 
-int SPREFIX(kbhit)(void);
-int SPREFIX(getch)(void);
-void SPREFIX(clear)(void);
-void SPREFIX(bgcolor)(PREFIX(Color) color);
-void SPREFIX(fgcolor)(PREFIX(Color) color);
-void SPREFIX(color)(PREFIX(Color) fg, PREFIX(Color) bg);
-void SPREFIX(move)(size_t col, size_t row);
-void SPREFIX(getpos)(size_t *x, size_t *y);
+int CO_S(kbhit)(void);
+int CO_S(getch)(void);
+void CO_S(clear)(void);
+void CO_S(bgcolor)(CO(Color) color);
+void CO_S(fgcolor)(CO(Color) color);
+void CO_S(color)(CO(Color) fg, CO(Color) bg);
+void CO_S(move)(size_t col, size_t row);
+void CO_S(getpos)(size_t *x, size_t *y);
+void CO_S(size)(struct winsize *size);
