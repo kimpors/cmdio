@@ -36,6 +36,9 @@ int CO_S(kbhit)(void)
 
 void CO_S(getpos)(size_t *x, size_t *y)
 {
+	char s[] = "\033[6n";
+	write(1, s, sizeof(s));
+
 	int oldf;
 	struct termios old, new;
 	tcgetattr(STDIN_FILENO, &old);
@@ -46,8 +49,7 @@ void CO_S(getpos)(size_t *x, size_t *y)
 	oldf = fcntl(STDIN_FILENO, F_GETFL, 0);
 	fcntl(STDIN_FILENO, F_SETFL, oldf | O_NONBLOCK);
 
-	printf("\033[6n");
-	scanf("\033[%ld,%ldR", x, y);
+	scanf("\033[%ld,%ldR", y, x);
 
 	tcsetattr(STDIN_FILENO, TCSANOW, &old);
 	fcntl(STDIN_FILENO, F_SETFL, oldf);
